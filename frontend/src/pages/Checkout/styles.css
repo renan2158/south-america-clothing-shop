@@ -1,0 +1,61 @@
+#checkout-container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+#checkout-container header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 30px;
+}
+
+#checkout-container header #logo {
+    max-height: 55px;
+}
+
+#checkout-container header .cancel {
+    padding: 7px 10px;
+
+    background-color: #FF0000;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+
+    transition: 400ms;
+}
+
+#checkout-container header .cancel:hover {
+    opacity: 0.8;
+}
+
+#checkout-container header .cancel a {
+    color: #FFF;
+}
+
+#checkout-container section.body {
+    width: 100%;
+    height: 82vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+#checkout-container section.body .checkout {
+    width: 60%;
+    height: 80%;
+
+    margin-top: 2%;
+    
+    background-color: #d5d5d5;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}

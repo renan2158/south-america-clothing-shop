@@ -1,0 +1,11 @@
+.content {
+    max-height: 82vh;
+}
+
+.content img {
+    width: 100%;
+    max-height: 82vh;
+
+    object-fit: cover;
+}
+

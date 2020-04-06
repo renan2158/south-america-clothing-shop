@@ -1,0 +1,116 @@
+#gallery-container {
+    max-height: 100vh;
+}
+
+#content {
+    display: flex;
+}
+
+#content #categories {
+    width: 15%;
+    height: 100%;
+
+    padding: 0px 30px;
+
+    min-width: 17%;
+}
+
+#content #categories .category {
+    width: 100%;
+
+    padding: 20px;
+
+    background-color: #e8e8e8;
+
+    border: none;
+    border-radius: 10px;
+    
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 400ms;
+
+    cursor: pointer;
+}
+
+#content #categories .category:hover {
+    color: #FFF;
+    background-color: #0e00d6;
+}
+
+#content #categories .category img {
+    height: 40px;
+    margin-left: 5px;
+}
+
+#content #feed {
+    width: 85%;
+    height: 100%;
+}
+
+#content .grid {
+    width: 100%;
+    height: 250px;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 15px;
+
+    list-style: none;
+}
+
+#content .grid .card {
+    width: 180px;
+    height: 250px;
+
+    margin-bottom: 15px;
+
+    border-radius: 10px;
+
+    background-color: #e8e8e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    cursor: pointer;
+
+    transition: 400ms;
+}
+
+#content .grid .card:hover {
+    opacity: 0.75;
+}
+
+#content .grid .card .image {
+    width: 150px;
+    height: 165px;
+}
+
+#content .grid .card .image img {
+    width: 150px;
+    height: 165px;
+
+    object-fit: cover;
+
+    border-radius: 7px;
+}
+
+#content .grid .card .item {
+    font-size: 18px;
+    font-weight: 400;
+
+    margin-top: 5px;
+}
+
+#content .grid .card .price {
+    font-size: 18px;
+    font-weight: 500;
+
+    margin-top: 3px;
+}
