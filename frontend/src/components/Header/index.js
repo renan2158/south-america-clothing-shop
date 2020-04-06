@@ -4,7 +4,7 @@ import { FiSearch, FiShoppingBag } from 'react-icons/fi';
 
 import './styles.css';
 
-const logoImg = require('../assets/logo-black.png');
+const logoImg = require('../../assets/logo-black.png');
 
 export default function Header() {
 

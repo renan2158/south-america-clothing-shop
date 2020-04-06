@@ -28,7 +28,7 @@
 }
 
 #checkout-container header .cancel:hover {
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 #checkout-container header .cancel a {
@@ -40,22 +40,16 @@
     height: 82vh;
 
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 #checkout-container section.body .checkout {
     width: 60%;
-    height: 80%;
-
-    margin-top: 2%;
     
     background-color: #d5d5d5;
 
     border-radius: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     padding: 20px;
 }
