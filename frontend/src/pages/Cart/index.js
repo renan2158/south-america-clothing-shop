@@ -1,102 +1,87 @@
 import { Link } from 'react-router-dom';
-import Header from '../../components/Header/index';
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
-import './styles.css';
+import ItemsList from './items_list';
+import Header from '../../components/Header/index';
+
 import api from '../../services/api';
 
-// const item = require('../../assets/item.jpeg');
+import './styles.css';
 
-export default function Cart() {
-    const [cartItems, setCartItems] = useState([]);
-    const [itemsQuantity, setItemsQuantity] = useState([]);
+export default class Cart extends Component {
+    constructor(props) {
+        super(props);
 
-    function handleCartItems() {
-        /*var count = 0;
-        var separatedItems = [];
-        var items = localStorage.getItem('cartItems');
+        this.state = {
+            items: []
+        }
 
-        for (var i = 0; i < items.length; i++) {
-            if (i === 0){
-                count++;
-            } else {
-                if (items[i] === items[i - 1]) {
-                    count++;
-                    console.log("here")
-                } else {
-                    separatedItems.push([i - 1, count]);
-
-                    count = 1;
-                }
-            }
-        }*/
-
-        return [4, 1];
+        this.separateItems = this.separateItems.bind(this);
+        this.handleCartItems = this.handleCartItems.bind(this);
     }
 
-    /*useEffect(() => {
-        var items = [];
-        // const quantity = handleCartItems();
-        const quantity = [4, 1];
-        setItemsQuantity([quantity]);
+    componentDidMount() {
+        this.handleCartItems();
+    }
+
+    separateItems() {
+        var count = 0;
+        var separatedItems = [];
+        const items = localStorage.getItem('cartItems').split(',');
         
-        alert(quantity);
 
-        quantity.forEach(item => {
-            api.get('/category', item[0])
-            .then(response => {
-                items.push(response.data);
-            });
-        })
+        for (var i = 0; i < items.length; i++) {
+            count++;
 
-        setCartItems(items);
-    }, []);*/
+            if (items[i] !== items[i + 1] || items.length === 1) {
+                separatedItems.push([items[i], count]);
 
-    return (
-        <div id="cart-container">
-            <Header />
+                count = 0;
+            }
+        }
+        
+        return separatedItems;
+    }
+    
+    handleCartItems() {
+        var cartItems = [];
+        const separatedItems = this.separateItems();
 
-            <section id="content">
-                <div className="items">
-                    <ul>
-                        <li>
-                            <div className="item">
-                                {cartItems.map(cartItem => (
-                                    <div>
-                                        <section className="info">
-                                            <img src={cartItem.imageUrl} alt="" />
-                                            
-                                            <div>
-                                                <p className="descricao">cartItem.description</p>
-                                                <p className="detalhe">Size: {cartItem.size}</p>
-                                            </div>
-                                        </section>
+        separatedItems.forEach(async (item) => {
+            var itemAttributes = [];
+            const response = await api.post(`cart_item/${item[0]}`);
 
-                                        <section className="total">
-                                            <div className="quantity">
-                                                <button type="button" className="minus">-</button>
+            itemAttributes.push(response.data.id);
+            itemAttributes.push(response.data.imageUrl);
+            itemAttributes.push(response.data.description);
+            itemAttributes.push(response.data.size);
+            itemAttributes.push(response.data.price);
+            itemAttributes.push(response.data.gender);
+            itemAttributes.push(item[1]);
 
-                                            <label>{itemsQuantity[cartItems.indexOf(cartItem)]}</label>
-                                                
-                                                <button type="button" className="plus">+</button>
-                                            </div>
+            cartItems.push(itemAttributes);
+        });
 
-                                            <div className="value">
-                                                <p className="total-text">Value:</p>
-                                                <p className="total-value">cartItem.value</p>
-                                            </div>
-                                        </section>
-                                    </div>
-                                ))}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+        this.setState({
+            items: cartItems
+        });
+    }
 
-                <div className="payment">
-                    <Link to="/checkout">Continue to Payment</Link>
-                </div>
-            </section>
-        </div>
-    );
+    render() {
+        return (
+            <div id="cart-container">
+                <Header />
+
+                <section id="content">
+                    <ItemsList
+                        items={this.state.items}
+                    />
+
+                    <div className="payment">
+                        <Link to="/checkout">Continue to Payment</Link>
+                    </div>
+                </section>
+            </div>
+        );
+    }
 }

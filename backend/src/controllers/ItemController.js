@@ -1,21 +1,27 @@
 const connection = require('../database/connection');
 
 module.exports = {
-    async index(request, response) {
-        const items = await connection('items')
-            .select('*');
-        
-        return response.json(items);
-    },
-
     async genderIndex(request, response) {
-        const { gender } = request.params;
+        const { gender } = request.body;
 
         const items = await connection('items')
             .where('gender', gender)
             .select('*');
         
         return response.json(items);
+    },
+
+    async unique(request, response) {
+        const { id } = request.params;
+
+        const item = await connection('items')
+            .where('id', id)
+            .select('*')
+            .first();
+        
+        console.log(item)
+        
+        return response.json(item);
     },
 
     async create(request, response) {

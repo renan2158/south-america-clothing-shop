@@ -13,10 +13,10 @@ routes.post('/items', ItemController.create);
 //Do it with query
 // routes.post('/items/:id', ItemController.unique);
 
-routes.get('/items', ItemController.index);
-routes.post('/items/:gender', ItemController.genderIndex);
+routes.post('/gallery', ItemController.genderIndex);
+routes.get('/search', CategoryController.searchIndex);
 
-routes.get('/category', CategoryController.unique);
+routes.post('/cart_item/:id', ItemController.unique);
 routes.post('/category', CategoryController.categoryIndex);
 
 module.exports = routes;

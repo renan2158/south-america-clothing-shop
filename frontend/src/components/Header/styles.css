@@ -13,6 +13,11 @@
     font-weight: 500;
 }
 
+.header #menus button {
+    background-color: transparent;
+    border: none;
+}
+
 .header .menu {
     cursor: pointer;
 }
@@ -27,16 +32,16 @@
 }
 
 #actions .search {
-    display: flex;
-    align-items: center;
-
-    background-color: #e8e8e8;
-
-    padding: 7px;
-
-    border-radius: 8px;
-
     margin-right: 10px;
+}
+
+#actions .search .search-button {
+    background: none;
+    border: none;
+}
+
+#actions .search .search-button svg {
+    cursor: pointer;
 }
 
 #actions input {

@@ -2,20 +2,73 @@
     max-height: 100vh;
 }
 
-#content {
-    display: flex;
+#gallery-container #loading-container {
+    position: absolute;
+
+    width: 85vw;
+    height: 82vh;
+
+    left: 15vw;
+
+    background-color: #f4f4f4;
+
+    transition: 400ms;
 }
 
-#content #categories {
-    width: 15%;
+#gallery-container section {
+    background-color: #e0e0e0;
+    
+    width: 100%;
+    height: 0px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    visibility: visible;
+
+    transition: 200ms;
+}
+
+#gallery-container section.hidden,
+#gallery-container section.hidden input {
+    height: 0px;
+
+    visibility: hidden;
+
+    margin: 0;
+}
+
+#gallery-container section input {
+    width: 50%;
+
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    background-color: #c0c0c0;
+}
+
+#gallery-container #content {
+    display: flex;
+
+    width: 100%;
     height: 100%;
+}
+
+#gallery-container #content #categories {
+    height: 100%;
+    min-width: 15%;
 
     padding: 0px 30px;
-
-    min-width: 17%;
 }
 
-#content #categories .category {
+#gallery-container #content #categories .category {
     width: 100%;
 
     padding: 20px;
@@ -36,22 +89,22 @@
     cursor: pointer;
 }
 
-#content #categories .category:hover {
+#gallery-container #content #categories .category:hover {
     color: #FFF;
     background-color: #0e00d6;
 }
 
-#content #categories .category img {
+#gallery-container #content #categories .category img {
     height: 40px;
     margin-left: 5px;
 }
 
-#content #feed {
+#gallery-container #content #feed {
     width: 85%;
     height: 100%;
 }
 
-#content .grid {
+#gallery-container #content .grid {
     width: 100%;
     height: 250px;
 
@@ -62,7 +115,7 @@
     list-style: none;
 }
 
-#content .grid .card {
+#gallery-container #content .grid .card {
     width: 180px;
     height: 250px;
 
@@ -83,16 +136,16 @@
     transition: 400ms;
 }
 
-#content .grid .card:hover {
+#gallery-container #content .grid .card:hover {
     opacity: 0.75;
 }
 
-#content .grid .card .image {
+#gallery-container #content .grid .card .image {
     width: 150px;
     height: 165px;
 }
 
-#content .grid .card .image img {
+#gallery-container #content .grid .card .image img {
     width: 150px;
     height: 165px;
 
@@ -101,14 +154,14 @@
     border-radius: 7px;
 }
 
-#content .grid .card .item {
+#gallery-container #content .grid .card .item {
     font-size: 18px;
     font-weight: 400;
 
     margin-top: 5px;
 }
 
-#content .grid .card .price {
+#gallery-container #content .grid .card .price {
     font-size: 18px;
     font-weight: 500;
 

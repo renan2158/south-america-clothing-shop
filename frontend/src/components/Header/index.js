@@ -1,17 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { FiSearch, FiShoppingBag } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 
 const logoImg = require('../../assets/logo-black.png');
 
 export default function Header() {
-
-    function handleGender(gender) {
-        localStorage.setItem('itemsGender', gender);
-        localStorage.setItem('itemsCategory', 'tshirts');
-    }
+    const [searching, setSearching] = useState(false);
 
     return (
         <div className="header-container">
@@ -20,26 +16,46 @@ export default function Header() {
                     <img id="logo" src={logoImg} alt="South America Logo" />
                 </Link>
 
-                <section id="menus">
-                    <a className="menu" href="/gallery" onClick={() => handleGender('male')}>MEN</a>
-                    <a className="menu" href="/gallery" onClick={() => handleGender('female')}>WOMEN</a>
+                <div id="menus">
+                    <Link className="menu" to={{
+                        pathname: '/gallery',
+                        state: {
+                            gender: "male",
+                            searching: searching
+                        }
+                    }}>
+                        MEN
+                    </Link>
+                    
+                    <Link className="menu" to={{
+                        pathname: '/gallery',
+                        state: {
+                            gender: "female",
+                            searching: searching
+                        }
+                    }}>
+                        WOMEN
+                    </Link>
+
                     <Link className="menu" to="/contact">CONTACT</Link>
                     <Link className="menu" to="/about">ABOUT US</Link>
-                </section>
+                </div>
 
-                <section id="actions">
+                <div id="actions">
                     <div className="search">
-                        <input placeholder="Search" type="text" name="search" />
-                        
-                        <a href="/">
-                            <FiSearch size={25} color="#a0a0a0" />
-                        </a>
+                        <button
+                            className="search-button"
+                            type="button"
+                            onClick={() => setSearching(true)}
+                        >
+                            <FiSearch size={25} color="#121212" />
+                        </button>
                     </div>
 
-                    <a href="/cart">
+                    <Link to="/cart">
                         <FiShoppingBag size={25} color="#121212" />
-                    </a>
-                </section>
+                    </Link>
+                </div>
             </div>
         </div>
     );

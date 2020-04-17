@@ -12,14 +12,16 @@ module.exports = {
         return response.json(items);
     },
 
-    async unique(request, response) {
-        const id = request.body;
+    async searchIndex(request, response) {
+        const { search, gender } = request.body;
 
-        const item = await connection('items')
-            .where('id', id)
-            .select('*')
-            .first();
-        
-        return response.json(item);
+        const items = await connection('items')
+            .where('gender', gender)
+            .andWhere('desciption', 'like', '%'.concat(search).concat('%'))
+            .andWhere('desciption', 'like', search.concat('%'))
+            .andWhere('desciption', 'like', '%'.concat(search))
+            .select('*');
+
+        return response.json(items);
     },
 }

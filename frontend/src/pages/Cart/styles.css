@@ -12,7 +12,7 @@
     flex-direction: column;
 }
 
-#cart-container #content .items {
+#cart-container #content #items {
     width: 100%;
     height: 100%;
 
@@ -23,11 +23,11 @@
     padding: 20px;
 }
 
-#cart-container #content .items ul {
+#cart-container #content #items ul {
     list-style: none;
 }
 
-#cart-container .items ul .item {
+#cart-container #items ul .item {
     width: 100%;
     height: 150px;
 
@@ -42,11 +42,11 @@
     padding: 15px;
 }
 
-#cart-container .items ul .item .info {
+#cart-container #items ul .item .info {
     display: flex;
 }
 
-#cart-container .items ul .item img {
+#cart-container #items ul .item img {
     width: 120px;
     height: 120px;
 
@@ -55,27 +55,27 @@
     margin-right: 15px;
 }
 
-#cart-container .items ul .item .descricao {
+#cart-container #items ul .item .descricao {
     margin-top: 15px;
 
     font-size: 20px;
     font-weight: 400;
 }
 
-#cart-container .items ul .item .info .detalhe {
+#cart-container #items ul .item .info .detail {
     margin-top: 3px;
 
     font-size: 16px;
     font-weight: 400;
 }
 
-#cart-container .items ul .item .quantity {
+#cart-container #items ul .item .quantity {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#cart-container .items ul .item .quantity button {
+#cart-container #items ul .item .quantity button {
     border: none;
     border-radius: 5px;
 
@@ -88,12 +88,12 @@
     transition: 400ms;
 }
 
-#cart-container .items ul .item .quantity button:hover {
+#cart-container #items ul .item .quantity button:hover {
     color: #FFF;
     background-color: #FF0000;
 }
 
-#cart-container .items ul .item .value {
+#cart-container #items ul .item .value {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,13 +102,13 @@
     margin-top: 20px;
 }
 
-#cart-container .items ul .item .value .total-text {
+#cart-container #items ul .item .value .total-text {
     font-size: 16px;
 
     color: #FF0000;
 }
 
-#cart-container .items ul .item .value .total-value {
+#cart-container #items ul .item .value .total-value {
     margin: 0;
     
     color: #FF0000;
