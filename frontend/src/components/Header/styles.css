@@ -5,7 +5,27 @@
     padding: 30px;
 }
 
-.header #menus {
+.header-container #logo {
+    max-height: 3.5rem;
+
+    margin-left: 5%;
+}
+
+.header-container div form a {
+    padding: 1rem;
+    margin-right: 0.3rem;
+}
+
+.header-container div button {
+    padding: 1rem;
+    /* background-color: #b0b0b0; */
+}
+
+/* .header-container div ul li a.nav-link {
+    letter-spacing: 0.1px;
+} */
+
+/* .header #menus {
     display: flex;
     align-items: center;
 
@@ -20,10 +40,6 @@
 
 .header .menu {
     cursor: pointer;
-}
-
-.header #logo {
-    max-height: 55px;
 }
 
 #actions {
@@ -61,4 +77,5 @@
 
 .menu {
     margin-right: 55px;
-}
+} */
+

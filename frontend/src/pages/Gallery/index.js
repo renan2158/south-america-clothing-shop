@@ -9,18 +9,10 @@ export default class Gallery extends Component {
         super(props);
 
         this.state = {
-            search: null,
             category: null
         }
 
-        this.updateSearch = this.updateSearch.bind(this);
         this.updateCategory = this.updateCategory.bind(this);
-    }
-
-    updateSearch(value) {
-        this.setState({
-            search: value
-        })
     }
 
     updateCategory(value) {
@@ -34,52 +26,44 @@ export default class Gallery extends Component {
             <div id="gallery-container">
                 <Header />
 
-                <section className="hidden">
-                    <input placeholder="Search..." type="text" />
-                </section>
-
                 <div className="body">
                     <div id="content">
-                        <div id="categories">
+                        <section id="categories">
                             <button
                                 type="button"
-                                className="category"
+                                className="btn btn-primary"
                                 onClick={() => this.updateCategory("tshirts")}
                             >
-                                <p>T-SHIRTS</p>
-                                {/* <img src={tshirt} alt="" /> */}
+                                T-SHIRTS
                             </button>
 
                             <button
                                 type="button"
-                                className="category"
+                                className="btn btn-primary"
                                 onClick={() => this.updateCategory("coats")}
                             >
-                                <p>COATS</p>
-                                {/* <img src={coat} alt="" /> */}
+                                COATS
                             </button>
 
                             <button
                                 type="button"
-                                className="category"
+                                className="btn btn-primary"
                                 onClick={() => this.updateCategory("pants")}
                             >
-                                <p>PANTS</p>
-                                {/* <img src={pants} alt="" /> */}
+                                PANTS
                             </button>
 
                             <button
                                 type="button"
-                                className="category"
+                                className="btn btn-primary"
                                 onClick={() => this.updateCategory("shoes")}
                             >
-                                <p>SHOES</p>
-                                {/* <img src={shoes} alt="" /> */}
+                                SHOES
                             </button>
-                        </div>
+                        </section>
 
                         <ItemsGrid
-                            search={this.state.search}
+                            search={this.props.location.state['search']}
                             gender={this.props.location.state['gender']}
                             category={this.state.category}
                         />

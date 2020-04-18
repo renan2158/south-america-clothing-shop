@@ -1,0 +1,35 @@
+#about-container .about {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100vw;
+    height: 82vh;
+}
+
+#about-container .about .card {
+    border: 1px solid rgba(0,0,0,0.125);
+
+    background-color: #FFF;
+
+    min-width: 50rem;
+
+    padding: 2rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#about-container .about h1 {
+    margin-bottom: 2rem;
+}
+
+#about-container .card p {
+    margin: 0;
+
+    text-align: center;
+}

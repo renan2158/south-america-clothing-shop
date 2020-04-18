@@ -13,13 +13,12 @@ module.exports = {
     },
 
     async searchIndex(request, response) {
-        const { search, gender } = request.body;
+        const { search } = request.body;
 
         const items = await connection('items')
-            .where('gender', gender)
-            .andWhere('desciption', 'like', '%'.concat(search).concat('%'))
-            .andWhere('desciption', 'like', search.concat('%'))
-            .andWhere('desciption', 'like', '%'.concat(search))
+            .where('description', 'like', '%'.concat(search).concat('%'))
+            .orWhere('description', 'like', search.concat('%'))
+            .orWhere('description', 'like', '%'.concat(search))
             .select('*');
 
         return response.json(items);

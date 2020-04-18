@@ -8,7 +8,7 @@ const CARD_ELEMENT_OPTIONS = {
       color: "#32325d",
       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
       fontSmoothing: "antialiased",
-      fontSize: "16px",
+      fontSize: "1.5rem",
       "::placeholder": {
         color: "#aab7c4",
       },
@@ -23,11 +23,9 @@ const CARD_ELEMENT_OPTIONS = {
 export default function CardSection() {
   return (
     <div>
-      <label id="info">
-        Card Info:
-      </label>
-      
-      <CardElement options={CARD_ELEMENT_OPTIONS} />
+      <div className="card-element">
+        <CardElement options={CARD_ELEMENT_OPTIONS} />
+      </div>
     </div>
   );
 };

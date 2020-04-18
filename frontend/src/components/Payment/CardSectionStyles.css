@@ -7,13 +7,12 @@
 */
 
 .StripeElement {
-    height: 40px;
-    padding: 10px 12px;
+    height: 4.5rem;
+    padding: 1.5rem;
     width: 100%;
     color: #32325d;
     background-color: white;
     border: 1px solid transparent;
-    border-radius: 4px;
 
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
@@ -32,26 +31,28 @@
     background-color: #fefde5 !important;
 }
 
-div #info {
-    margin-bottom: 20px;
+form div .card-element {
+    margin-bottom: 1.5rem;
 }
 
-#confirmButton {
-    border: none;
-    border-radius: 7px;
-
-    background-color: #c4c4c4;
-
-    cursor: pointer;
-
-    padding: 7px 10px;
-
-    margin-top: 10px;
-
-    transition: 400ms;
+form {
+    text-align: end;
 }
 
-#confirmButton:hover {
-    color: #FFF;
-    background-color: #FF0000;
+#loading-page {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    transition: 200ms;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
 }

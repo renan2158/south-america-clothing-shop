@@ -1,43 +1,133 @@
+import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import { WaveTopBottomLoading } from 'react-loadingg';
 
-// import './styles.css';
+import './styles.css';
+
+const cookies = new Cookies();
 
 export default class ItemsList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            total: 0,
+            items: cookies.get('cartItems')
+        }
+
+        this.handleQuantity = this.handleQuantity.bind(this);
+        this.handleTotalPrice = this.handleTotalPrice.bind(this);
+    }
+
+    handleQuantity(obj, increase) {
+        const list = this.state.items;
+
+        if (increase) {
+            list[list.indexOf(obj)].quantity++;
+        } else {
+            if (list[list.indexOf(obj)].quantity > 1)
+                list[list.indexOf(obj)].quantity--;
+        }
+        
+        this.setState({
+            items: list
+        });
+
+        cookies.set('cartItems', list, { path: '/' });
+    }
+
+    handleTotalPrice() {
+        var total = 0;
+
+        this.state.items.forEach(item => {
+            total += item.quantity * item.price;
+        });
+
+        return total;
+    }
+
     render() {
-        return (
-            <div id="items">
-                <ul>
-                    <li>
-                        {this.props.items.forEach(item => (
-                            <div className="item" key={item[0]}>
-                                <section className="info">
-                                    <img src={item[1]} alt="" />
+        return !this.state.items || this.state.items.length === 0
+            ? (<div>
+                    <WaveTopBottomLoading color="#121212" />
+            </div>)
+        
+            : (<div>
+                <div id="items">
+                    <ul className="list-group">
+                        {this.state.items.map(item => (
+                            <li className="list-group-item list-group-item-action list-item" key={item.id}>
+                                <div className="product-info">
+                                    <img src={item.imageUrl} alt="" />
+
+                                    <div className="info">
+                                        <p className="description">
+                                            {item.description}
+                                        </p>
+
+                                        <p className="size">
+                                            Size: {item.size}
+                                        </p>
+
+                                        <p className="unit">
+                                            Unit: {Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD'
+                                            }).format(item.price)}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="quantity">
+                                    <button className="btn btn-primary minus" onClick={() => this.handleQuantity(item, false)}>{'<'}</button>
                                     
-                                    <div>
-                                        <p className="descricao">{item[2]}</p>
-                                        <p className="detail">Size: {item[3]}</p>
-                                    </div>
-                                </section>
-    
-                                <section className="total">
-                                    <div className="quantity">
-                                        <button type="button" className="minus">-</button>
-    
-                                        <label>{item[6]}</label>
-                                        
-                                        <button type="button" className="plus">+</button>
-                                    </div>
-    
-                                    <div className="value">
-                                        <p className="total-text">Price:</p>
-                                        <p className="total-value">{item[4]}</p>
-                                    </div>
-                                </section>
-                            </div>
+                                    <p className="number">
+                                        {item.quantity}
+                                    </p>
+
+                                    <button className="btn btn-primary plus"  onClick={() => this.handleQuantity(item, true)}>{'>'}</button>
+                                </div>
+
+                                <div className="price">
+                                    <p>Price:</p>
+
+                                    <p className="value">
+                                        {Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD'
+                                            }).format(item.price * item.quantity)}
+                                    </p>
+                                </div>
+                            </li>
                         ))}
-                    </li>
-                </ul>
+                    </ul>
+                </div>
+
+                <div className="total">
+                    <p className="text">Total: &nbsp;</p>
+                    <p className="total-value">
+                        {Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                        }).format(this.handleTotalPrice())}
+                    </p>
+                </div>
+
+                <div className="footer">
+                    <Link
+                        className="btn btn-primary btn-block"
+                        to={{
+                            pathname: '/checkout',
+                            state: {
+                                total: this.handleTotalPrice()
+                            }
+                        }}
+                    >
+                        Continue to Payment
+                    </Link>
+                </div>
             </div>
         );
     }
-}
+ }

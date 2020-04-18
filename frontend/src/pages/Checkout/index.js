@@ -1,31 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Payment from '../../components/Payment/index';
 
 import './styles.css';
 
-const logoImg = require('../../assets/logo-black.png');
+const logoImg = require('../../assets/horizontal-logo.png');
 
-export default function Checkout(){
+export default function Checkout(props){
+
     return (
         <div id="checkout-container">
             <header>
                 <div className="image">
-                    <Link to="/">
-                        <img id="logo" src={logoImg} alt="South America Logo" />
-                    </Link>
-                </div>
-
-                <div className="cancel">
-                    <Link to="/cart">
-                        Cancel checkout
-                    </Link>
+                    <img id="logo" src={logoImg} alt="South America Logo" />
                 </div>
             </header>
 
             <section className="body">
+                <h1>Checkout</h1>
+
                 <div className="checkout">
-                    <Payment />
+                    <Payment value={props.location.state['total']} />
                 </div>
             </section>
         </div>

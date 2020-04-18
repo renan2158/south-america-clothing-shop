@@ -3,8 +3,10 @@ const stripe = require('stripe')('sk_test_diV9vP9OhZO8uXSkPlkKV1Ke00P6cF1Qe9');
 module.exports = {
     async generateClientSecret(request, response) {
         try {
+            const { value } = request.body;
+
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: 1099,
+                amount: value,
                 currency: 'usd',
                 
                 // Verify your integration in this guide by including this parameter

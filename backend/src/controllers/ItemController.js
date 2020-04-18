@@ -19,8 +19,6 @@ module.exports = {
             .select('*')
             .first();
         
-        console.log(item)
-        
         return response.json(item);
     },
 

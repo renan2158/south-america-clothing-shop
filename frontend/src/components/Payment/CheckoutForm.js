@@ -1,11 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { WaveTopBottomLoading } from 'react-loadingg';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 import api from '../../services/api';
 import CardSection from './CardSection';
 
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
   const stripe = useStripe();
+  const history = useHistory();
   const elements = useElements();
 
   const handleSubmit = async (event) => {
@@ -15,7 +18,11 @@ export default function CheckoutForm() {
       return;
     }
 
-    const response = await api.get('/client_secret');
+    const data = {
+      value: props.value
+    }
+
+    const response = await api.post('/client_secret', data);
 
     const clientSecret = response.data.client_secret;
 
@@ -23,7 +30,7 @@ export default function CheckoutForm() {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: 'Jenny Rosen',
+          name: 'South America',
         },
       }
     });
@@ -34,7 +41,8 @@ export default function CheckoutForm() {
 
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        alert("Sucess");
+        // cookies.remove('cartItems');
+        history.push({ pathname: '/', state: { notification: true } });
 
         // Show a success message to your customer
         // There's a risk of the customer closing the window before callback
@@ -45,10 +53,19 @@ export default function CheckoutForm() {
     }
   };
 
+  const handleButton = (event) => {
+    document.querySelector("#loading-page").classList.remove("hidden");
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <CardSection />
-      <button id="confirmButton" disabled={!stripe}>Confirm order</button>
+      <button className="btn btn-primary btn-block" onClick={handleButton} disabled={!stripe}>Confirm order</button>
+      {/* <Notification open={showNotification} /> */}
+
+      <div id="loading-page" className="hidden">
+        <WaveTopBottomLoading color="#121212" />
+      </div>
     </form>
   );
 }

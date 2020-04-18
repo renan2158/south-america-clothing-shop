@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { WaveTopBottomLoading } from 'react-loadingg';
+import Cookies from 'universal-cookie';
 
 import api from '../../services/api';
 
 import './styles.css';
+
+const cookies = new Cookies();
 
 export default class ItemsGrid extends Component {
     constructor(props) {
@@ -30,26 +32,61 @@ export default class ItemsGrid extends Component {
         }
     }
 
-    handleItem(id) {
-        if (!localStorage.getItem('cartItems')) {
-            localStorage.setItem('cartItems', id);
+    handleItem(item) {
+        var items = [];
+        var equal = false;
+
+        if (!cookies.get('cartItems')) {
+            const object = {
+                id: item.id,
+                imageUrl: item.imageUrl,
+                description: item.description,
+                size: item.size,
+                category: item.category,
+                gender: item.gender,
+                price: item.price,
+                quantity: 1
+            }
+
+            items = [object];
         } else {
-            var itemsList = [];
-            const items = [localStorage.getItem('cartItems')];
+            items = cookies.get('cartItems');
 
-            itemsList = [...items, id];
+            items.forEach(each => {
+                if (each.id === item.id) {
+                    each.quantity++;
 
-            localStorage.setItem('cartItems', itemsList.sort());
+                    equal = true;
+
+                    return;
+                }
+            });
+
+            if (!equal) {
+                const object = {
+                    id: item.id,
+                    imageUrl: item.imageUrl,
+                    description: item.description,
+                    size: item.size,
+                    category: item.category,
+                    gender: item.gender,
+                    price: item.price,
+                    quantity: 1
+                }
+
+                items.push(object);
+            }
         }
+
+        cookies.set('cartItems', items, { path: '/' });
     }
 
     async handleApi() {
-        if (this.props.search !== null) {
+        if (this.props.search) {
             const data = {
-                gender: this.props.gender,
                 search: this.props.search
             };
-
+            
             const response = await api.post('search', data);
 
             this.setState({
@@ -84,13 +121,13 @@ export default class ItemsGrid extends Component {
     render() {
         return this.state.items.length === 0
             ? (<div className="loading-container">
-                <WaveTopBottomLoading color="#121212" />
+                No results found.
             </div>)
             
             : (<div id="feed">
-                <div className="grid">
+                <ul className="grid">
                     {this.state.items.map(item => (
-                        <li className="card" key={item.id} onClick={() => this.handleItem(item.id)}>
+                        <li className="card" key={item.id} onClick={() => this.handleItem(item)}>
                             <div className="image">
                                 <img src={item.imageUrl} alt="" />
                             </div>
@@ -104,7 +141,7 @@ export default class ItemsGrid extends Component {
                             </p>
                         </li>
                     ))}
-                </div>
+                </ul>
             </div>
         );
     }
