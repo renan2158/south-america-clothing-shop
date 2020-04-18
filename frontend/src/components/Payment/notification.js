@@ -18,15 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Notification(props) {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-
-    useEffect(() => {
-        if (props) {
-            if (props.location.state['notification']) {
-                setOpen(true);
-            }
-        }
-    }, [props]);
+    const [open, setOpen] = React.useState(true);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

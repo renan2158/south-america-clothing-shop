@@ -42,7 +42,7 @@ export default function CheckoutForm(props) {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
         // cookies.remove('cartItems');
-        history.push({ pathname: '/', state: { notification: true } });
+        history.push({ pathname: '/', state: { notification: "true" } });
 
         // Show a success message to your customer
         // There's a risk of the customer closing the window before callback
