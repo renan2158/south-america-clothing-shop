@@ -16,9 +16,12 @@ module.exports = {
         const { search } = request.body;
 
         const items = await connection('items')
-            .where('description', 'like', '%'.concat(search).concat('%'))
-            .orWhere('description', 'like', search.concat('%'))
-            .orWhere('description', 'like', '%'.concat(search))
+        //    .where('description', 'like', '%'.concat(search).concat('%'))
+        //    .orWhere('description', 'like', search.concat('%'))
+        //    .orWhere('description', 'like', '%'.concat(search))
+            .where('description', 'like', `%${search}%`))
+            .orWhere('description', 'like', `${search}%`))
+            .orWhere('description', 'like', `%${search}`)
             .select('*');
 
         return response.json(items);

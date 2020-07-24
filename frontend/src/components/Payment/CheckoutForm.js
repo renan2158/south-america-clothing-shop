@@ -1,10 +1,13 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
 import { WaveTopBottomLoading } from 'react-loadingg';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 import api from '../../services/api';
 import CardSection from './CardSection';
+
+const cookies = new Cookies();
 
 export default function CheckoutForm(props) {
   const stripe = useStripe();
@@ -41,7 +44,7 @@ export default function CheckoutForm(props) {
 
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        // cookies.remove('cartItems');
+        cookies.remove('cartItems');
         history.push({ pathname: '/', state: { notification: "true" } });
 
         // Show a success message to your customer

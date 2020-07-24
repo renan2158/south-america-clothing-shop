@@ -137,7 +137,10 @@ export default class ItemsGrid extends Component {
                             </p>
 
                             <p className="price">
-                                {item.price}
+                                {Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                }).format(item.price)}
                             </p>
                         </li>
                     ))}

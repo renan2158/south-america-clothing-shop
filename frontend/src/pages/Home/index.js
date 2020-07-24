@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'react-awesome-slider/dist/styles.css';
 import AwesomeSlider from 'react-awesome-slider';
 import Header from '../../components/Header/index';
@@ -52,5 +52,6 @@ export default function Home(props) {
             </AutoplaySlider>
 
             <Notification />
-        </div>);
+        </div>
+    );
 }

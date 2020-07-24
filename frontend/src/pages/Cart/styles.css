@@ -119,3 +119,11 @@
 
     margin-top: 3rem;
 }
+
+#cart-container .no-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 75vh;
+}

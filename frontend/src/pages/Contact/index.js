@@ -37,34 +37,6 @@ export default function Contact() {
                         <button type="submit" className="btn btn-primary btn-block">Submit</button>
                     </fieldset>
                 </form>
-
-                {/* <form className="form">
-                    
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="E-mail"
-                    />
-                    
-                    <input
-                        type="text"
-                        name="subject"
-                        placeholder="Subject"
-                    />
-                    
-                    <textarea
-                        name="message"
-                        cols="30"
-                        rows="10"
-                        placeholder="Message"
-                    ></textarea>
-
-                    <button
-                        type="submit"
-                        name="submit"
-                        value="submit"
-                    >Submit</button>
-                </form> */}
             </div>
         </div>
     );

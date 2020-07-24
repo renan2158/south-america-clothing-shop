@@ -1,7 +1,6 @@
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
-import { WaveTopBottomLoading } from 'react-loadingg';
 
 import './styles.css';
 
@@ -49,8 +48,8 @@ export default class ItemsList extends Component {
 
     render() {
         return !this.state.items || this.state.items.length === 0
-            ? (<div>
-                    <WaveTopBottomLoading color="#121212" />
+            ? (<div className="no-items">
+                    <h1>No items in the cart.</h1>
             </div>)
         
             : (<div>
